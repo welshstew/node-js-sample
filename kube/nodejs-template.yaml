@@ -141,19 +141,19 @@ objects:
     type: ClusterIP
   status:
     loadBalancer: {}
-apiVersion: v1
-kind: Route
-metadata:
-  labels:
-    app: node-js-sample
-  name: node-js-sample
-spec:
-  host: node-js-sample-nodejs.rhel-cdk.10.1.2.2.xip.io
-  port:
-    targetPort: 8080-tcp
-  to:
-    kind: Service
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: node-js-sample
     name: node-js-sample
+  spec:
+    host: node-js-sample-nodejs.rhel-cdk.10.1.2.2.xip.io
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: node-js-sample
 parameters:
 - name: "REGISTRY_IP"
   value: "172.30.123.229"
