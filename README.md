@@ -2,6 +2,8 @@
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
+Forked from [GitHub](https://github.com/heroku/node-js-sample).
+
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
@@ -23,9 +25,20 @@ git push heroku master
 heroku open
 ```
 
-Alternatively, you can deploy your own copy of the app using the web-based flow:
+## Deploying to OpenShift
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+```
+oc new-project nodejs
+
+#add the template..
+oc create -f kube/nodejs-template.yaml
+
+#get the docker registry ip
+export REGISTRY_IP=$(oc get svc/docker-registry -n default -o json | jq .spec.clusterIP)
+oc new-app --template=nodejs-sample -pREGISTRY_IP=${REGISTRY_IP} 
+
+```
+
 
 ## Documentation
 
